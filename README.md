@@ -9,6 +9,11 @@
 
 The repository implements the pipi parametrization from ["Coupled channel analysis of pp→π ηη and at 900 MeV/c and of ππ-scattering data"](https://inspirehep.net/literature/1754182), with the [supplemental material](https://static-content.springer.com/esm/art%3A10.1140%2Fepjc%2Fs10052-021-09821-2/MediaObjects/10052_2021_9821_MOESM1_ESM.pdf)
 
+## Related projects
+
+Several pipi scattering amplitude are available elsewhere:
+ - Amplitude by the Madrid group, [PiPiMadrid.jl](https://github.com/mmikhasenko/PiPiMadrid.jl)
+ - Anisovich-Sarantsev K-matrix, in [the PR](https://github.com/RUB-EP1/international-k-matrix-day/pull/18) of international K-matrix day
 
 ## Acknowledgement
 
