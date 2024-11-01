@@ -6,12 +6,7 @@ using Parameters
 
 theme(:wong2, frame = :box, grid = false)
 
-default_pars = (
-    mf0500 = 0.5146109988244556,
-    mf0980 = 0.9062999999986513,
-    mf01370 = 1.23089000002673,
-    mf01500 = 1.461043944511787,
-    mf01710 = 1.696114327468766,
+default_pars = (mf = [0.5146109988244556, 0.9062999999986513, 1.23089000002673, 1.461043944511787, 1.696114327468766],
     # 
     gpipif0500 = 0.749866997688989,
     g4pif0500 = -0.01257099832673861,
@@ -71,10 +66,10 @@ function Kmatrix(s; pars = default_pars)
     @unpack gpipif01500, g4pif01500, gKKf01500, getaetaf01500, getaetaprimef01500 = pars
     @unpack gpipif01710, g4pif01710, gKKf01710, getaetaf01710, getaetaprimef01710 = pars
 
-    @unpack mf0500, mf0980, mf01370, mf01500, mf01710 = pars
+    @unpack mf = pars
 
     # bare poles  
-    M = [mf0500, mf0980, mf01370, mf01500, mf01710]
+    M = mf
 
     # couplings
     G0500 = [gpipif0500, g4pif0500, gKKf0500, getaetaf0500, getaetaprimef0500]
