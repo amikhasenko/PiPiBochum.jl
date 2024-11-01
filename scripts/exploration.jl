@@ -111,8 +111,12 @@ function c(m1, m2, s)
     term1 = (2 * qa_val / sqrt(s)) * log((m1^2 + m2^2 - s + 2 * sqrt(s) * qa_val) / (2 * m1 * m2))
     term2 = (m1^2 - m2^2) * ((1 / s) - (1 / (m1 + m2)^2)) * log(m1 / m2)
     Σ = (1 / (π)) * (term1 - term2)
-    return Σ
+    return -Σ
 end
+
+@assert imag(c(mpi, mpi, 0.3^2 + 0im)) ≈ -ρ(mpi, mpi, 0.3^2 + 0im)
+
+
 
 ChewMmat(s) = diagm(
     [
@@ -123,8 +127,29 @@ ChewMmat(s) = diagm(
     c(meta, metaprime, s),
 ]
 )
-c(mpi, mpi, 0.3^2 + 0im)
-ρ(mpi, mpi, 0.3^2 + 0im)
+
+
+function amplitude(s)
+    _K = Kmatrix(s)
+    _C = ChewMmat(s)
+    𝕀 = Matrix(I, (5, 5))
+    inv(𝕀 + _K * _C) * _K
+end
+
+amplitude(1.1 + 0im)
+
+
+let
+    ev = range(0.3, 2.0, 1000)
+    yv = map(ev) do e
+        amplitude(e^2 + 0im)[1, 1]
+    end
+    plot()
+    plot!(ev, yv |> real, lab = "real")
+    plot!(ev, yv |> imag, lab = "imag")
+    plot!()
+end
+
 
 diagm([1, 2])
 diag(ChewMmat(0.3^2 + 0im))
