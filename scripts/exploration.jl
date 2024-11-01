@@ -3,54 +3,54 @@ using LinearAlgebra
 using Random
 using Plots
 
+theme(:wong2, frame = :box, grid = false)
 
 function Kmatrix(s)
 
-
     # K-matrix parameter 
     M = collect((
-        mf0500=0.5146109988244556,
-        mf0980=0.9062999999986513,
-        mf01370=1.23089000002673,
-        mf01500=1.461043944511787,
-        mf01710=1.696114327468766,
+        mf0500 = 0.5146109988244556,
+        mf0980 = 0.9062999999986513,
+        mf01370 = 1.23089000002673,
+        mf01500 = 1.461043944511787,
+        mf01710 = 1.696114327468766,
     ))
     G0500 = collect((
-        gpipif0500=0.749866997688989,
-        g4pif0500=-0.01257099832673861,
-        gKKf0500=0.2753599978535977,
-        getaetaf0500=-0.1510199937514032,
-        getaetaprimef0500=0.3610299929020451,
+        gpipif0500 = 0.749866997688989,
+        g4pif0500 = -0.01257099832673861,
+        gKKf0500 = 0.2753599978535977,
+        getaetaf0500 = -0.1510199937514032,
+        getaetaprimef0500 = 0.3610299929020451,
     ))
 
 
     G0980 = collect((
-        gpipif0980=0.06400735441028882,
-        g4pif0980=0.002039993700021009,
-        gKKf0980=0.7741299935288173,
-        getaetaf0980=0.5099954460483236,
-        getaetaprimef0980=0.131119996207024,
+        gpipif0980 = 0.06400735441028882,
+        g4pif0980 = 0.002039993700021009,
+        gKKf0980 = 0.7741299935288173,
+        getaetaf0980 = 0.5099954460483236,
+        getaetaprimef0980 = 0.131119996207024,
     ))
     G1370 = collect((
-        gpipif01370=-0.2341669602361275,
-        g4pif01370=-0.01031664796738707,
-        gKKf01370=0.7228310629513335,
-        getaetaf01370=0.1193373160160431,
-        getaetaprimef01370=0.3679219171982366,
+        gpipif01370 = -0.2341669602361275,
+        g4pif01370 = -0.01031664796738707,
+        gKKf01370 = 0.7228310629513335,
+        getaetaf01370 = 0.1193373160160431,
+        getaetaprimef01370 = 0.3679219171982366,
     ))
     G1500 = collect((
-        gpipif01500=0.01270001206662291,
-        g4pif01500=0.2670000044701449,
-        gKKf01500=0.09214335545338775,
-        getaetaf01500=0.02742288751616556,
-        getaetaprimef01500=-0.04024795048926635,
+        gpipif01500 = 0.01270001206662291,
+        g4pif01500 = 0.2670000044701449,
+        gKKf01500 = 0.09214335545338775,
+        getaetaf01500 = 0.02742288751616556,
+        getaetaprimef01500 = -0.04024795048926635,
     ))
     G1710 = collect((
-        gpipif01710=-0.1424226773316178,
-        g4pif01710=0.2277971435654336,
-        gKKf01710=0.1598113086438209,
-        getaetaf01710=0.162720778677211,
-        getaetaprimef01710=-0.1739657300479793,
+        gpipif01710 = -0.1424226773316178,
+        g4pif01710 = 0.2277971435654336,
+        gKKf01710 = 0.1598113086438209,
+        getaetaf01710 = 0.162720778677211,
+        getaetaprimef01710 = -0.1739657300479793,
     ))
 
     G = [
@@ -96,15 +96,16 @@ function Kmatrix(s)
 end
 
 #  masses of the decay products 
-mpi=0.13957
-meta=0.547862
-m2pi=0.26996  # m2pi = 2 mpi
-mKp=0.49367
-mK0=0.497614
-metaprime=0.95778
-ρ(m1, m2, s) = √(1 - ((m1 + m2)^2 / s)) * √(1 - (m1 - m2)^2 / s)
+const mpi = 0.13957
+const meta = 0.547862
+const m2pi = 0.26996  # m2pi = 2 mpi
+const mKp = 0.49367
+const mK0 = 0.497614
+const metaprime = 0.95778
 
-qa(m1, m2, s) = ρ(m1, m2, s) * √(s) / 2
+ρ(m1, m2, s) = sqrt(1 - ((m1 + m2)^2 / s)) * sqrt(1 - (m1 - m2)^2 / s)
+qa(m1, m2, s) = ρ(m1, m2, s) * sqrt(s) / 2
+
 function c(m1, m2, s)
     qa_val = qa(m1, m2, s)
     term1 = (2 * qa_val / sqrt(s)) * log((m1^2 + m2^2 - s + 2 * sqrt(s) * qa_val) / (2 * m1 * m2))
@@ -118,20 +119,31 @@ ChewMmat(s) = diagm(
     c(mpi, mpi, s),
     c(m2pi, m2pi, s),
     c(mKp, mK0, s),
-    c(meta, meta, s), 
+    c(meta, meta, s),
     c(meta, metaprime, s),
-    ]
+]
 )
-c(mpi, mpi, 0.3^2+0im)
-ρ(mpi, mpi, 0.3^2+0im)
+c(mpi, mpi, 0.3^2 + 0im)
+ρ(mpi, mpi, 0.3^2 + 0im)
 
 diagm([1, 2])
-diag(ChewMmat(0.3^2+0im))
+diag(ChewMmat(0.3^2 + 0im))
+
+let
+    ev = range(0.01, 2.0, 1000)
+    yv = map(ev) do e
+        c(mpi, mpi, e^2 + 0.0im)[1, 1]
+    end
+    plot()
+    plot!(ev, yv .|> real, ylim = (-1, 1), lab = "re")
+    plot!(ev, yv .|> imag, ylim = (-1, 1), lab = "im")
+end
+
 
 let
     ev = range(0.3, 2.0, 1000)
     yv = map(ev) do e
         Kmatrix(e^2)[1, 1]
     end
-    plot(ev, yv, ylim=(-1, 1))
+    plot(ev, yv, ylim = (-1, 1))
 end
