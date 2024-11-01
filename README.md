@@ -6,7 +6,6 @@
 [![Coverage](https://codecov.io/gh/amikhasenko/PiPiBochum.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/amikhasenko/PiPiBochum.jl)
 [![BestieTemplate](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/JuliaBesties/BestieTemplate.jl/main/docs/src/assets/badge.json)](https://github.com/JuliaBesties/BestieTemplate.jl)
 
-
 The repository implements the pipi parametrization from ["Coupled channel analysis of pp→π ηη and at 900 MeV/c and of ππ-scattering data"](https://inspirehep.net/literature/1754182), with the [supplemental material](https://static-content.springer.com/esm/art%3A10.1140%2Fepjc%2Fs10052-021-09821-2/MediaObjects/10052_2021_9821_MOESM1_ESM.pdf)
 
 ## Related projects
