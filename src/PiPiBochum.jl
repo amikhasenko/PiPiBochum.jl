@@ -1,5 +1,7 @@
 module PiPiBochum
 
-greet() = print("Hello World!")
+include("constants.jl")
+include("parametrs.jl")
+include("computations.jl")
 
 end # module test
