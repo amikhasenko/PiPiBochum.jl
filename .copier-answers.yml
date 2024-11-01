@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier
+AnswerStrategy: minimum
+Authors: "Alex Mikhasenko"
+JuliaIndentation: 4
+JuliaMinVersion: "1.10"
+License: MIT
+LicenseCopyrightHolders: Alex Mikhasenko
+PackageName: PiPiBochum
+PackageOwner: amikhasenko
+PackageUUID: 2a790af1-8976-4d5a-adc9-3981f32989e5
+_commit: v0.14.0
+_src_path: https://github.com/JuliaBesties/BestieTemplate.jl
