@@ -1,9 +1,9 @@
 using PiPiBochum
-using LinearAlgebra
-using Random
 using Plots
 using Parameters
 
+import PiPiBochum: amplitude, amplitude_pipi_hat
+import PiPiBochum: default_pars_paper
 
 
 let
@@ -13,19 +13,12 @@ let
     end
     plot()
     plot!(yv, lab = "")
+    yv = map(ev) do e
+        amplitude_pipi_hat(e^2 + 0im; pars = default_pars_paper)
+    end
+    plot!(yv, lab = "")
     plot!()
 end
-
-
-let
-    ev = range(0.3, 2.0, 1000)
-    yv = map(ev) do e
-        Kmatrix(e^2)[1, 1]
-    end
-    plot(ev, yv, ylim = (-1, 1))
-end
-
-
 
 let
     ev = range(0.3, 2.0, 1000)
