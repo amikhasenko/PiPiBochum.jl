@@ -1,12 +1,4 @@
-using PiPiBochum
-using LinearAlgebra
-using Random
-using Plots
-using Parameters
-
-theme(:wong2, frame=:box, grid=false)
-
-function Kmatrix(s; pars=default_pars)
+function Kmatrix(s; pars = default_pars)
 
     # resonances
     @unpack Gα1, Gα2, Gα3, Gα4, Gα5 = pars
@@ -15,7 +7,7 @@ function Kmatrix(s; pars=default_pars)
         Gα2 * Gα2',
         Gα3 * Gα3',
         Gα4 * Gα4',
-        Gα5 * Gα5'
+        Gα5 * Gα5',
     ]
 
     # bare poles  
@@ -46,7 +38,6 @@ end
 
 #  masses of the decay products 
 
-
 ρ(m1, m2, s) = sqrt(1 - ((m1 + m2)^2 / s)) * sqrt(1 - (m1 - m2)^2 / s)
 qa(m1, m2, s) = ρ(m1, m2, s) * sqrt(s) / 2
 
@@ -57,10 +48,6 @@ function c(m1, m2, s)
     Σ = (1 / (π)) * (term1 - term2)
     return -Σ
 end
-
-
-
-
 
 ChewMmat(s) = diagm(
     [
@@ -73,7 +60,7 @@ ChewMmat(s) = diagm(
 )
 
 
-function amplitude(s; pars=default_pars)
+function amplitude(s; pars = default_pars)
     _K = Kmatrix(s; pars)
     _C = ChewMmat(s)
     𝕀 = Matrix(I, (5, 5))
@@ -81,37 +68,5 @@ function amplitude(s; pars=default_pars)
 end
 
 
-
-
-let
-    ev = range(0.3, 2.0, 1000)
-    yv = map(ev) do e
-        amplitude(e^2 + 0im)[1, 1]
-    end
-    plot()
-    plot!(ev, yv |> real, lab="real")
-    plot!(ev, yv |> imag, lab="imag")
-    plot!()
-end
-
-amplitude_pipi_hat(s; pars=default_pars) =
+amplitude_pipi_hat(s; pars = default_pars) =
     amplitude(s; pars)[1, 1] * ρ(mpi, mpi, s)
-
-let
-    ev = range(0.3, 2.0, 5000)
-    yv = map(ev) do e
-        amplitude_pipi_hat(e^2 + 0im)
-    end
-    plot()
-    plot!(yv, lab="")
-    plot!()
-end
-
-
-let
-    ev = range(0.3, 2.0, 1000)
-    yv = map(ev) do e
-        Kmatrix(e^2)[1, 1]
-    end
-    plot(ev, yv, ylim=(-1, 1))
-end
