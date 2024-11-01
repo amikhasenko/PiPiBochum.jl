@@ -6,15 +6,15 @@ using InteractiveUtils
 
 # ╔═╡ f353bda8-4c7f-4359-be8b-7d09981fa2fd
 begin
-	import Pkg
-	Pkg.activate(joinpath(@__DIR__, ".."))
-	using Plots
-	using LaTeXStrings
-	using Plots.PlotThemes
+    import Pkg
+    Pkg.activate(joinpath(@__DIR__, ".."))
+    using Plots
+    using LaTeXStrings
+    using Plots.PlotThemes
 end
 
 # ╔═╡ ba93d210-c761-4a74-84d6-2df23fc8338f
-theme(:wong2, frame=:box, grid = false, ylim = (:auto, :auto))
+theme(:wong2, frame = :box, grid = false, ylim = (:auto, :auto))
 
 # ╔═╡ 3e4217f4-4228-4b7b-9831-e6c448e4c892
 plot(sin, -3, 4, ylim = (-1, 1), label = L"y_1")
