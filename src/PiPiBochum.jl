@@ -1,4 +1,4 @@
-module SpiralGalaxy
+module PiPiBochum
 
 greet() = print("Hello World!")
 
